@@ -1,5 +1,5 @@
 import { newId, copyText } from "./browser-utils.js";
-import { renderPage, renderLayer } from "./views.js?v=20260915-recommendation";
+import { renderPage, renderLayer } from "./views.js?v=20260915-stable-layer";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
@@ -69,16 +69,18 @@ function render() {
   };
   const scroll = document.querySelector(".panel")?.scrollTop || 0;
   const oldKey = lastLayerKey;
-  lastLayerKey = top()?.key;
-  document.getElementById("app").innerHTML = renderPage(model);
-  document.getElementById("layer").innerHTML = renderLayer(model);
+  const nextKey = top()?.key;
+  const sameLayer = !!nextKey && nextKey === oldKey;
+  lastLayerKey = nextKey;
+  if (!sameLayer) document.getElementById("app").innerHTML = renderPage(model);
+  document.getElementById("layer").innerHTML = renderLayer(model, !sameLayer);
   document.getElementById("app").inert = !!top();
   document.body.style.overflow = top() ? "hidden" : "";
   if (model.busy)
     document
       .querySelectorAll("button,input,select,textarea")
       .forEach((el) => (el.disabled = true));
-  if (lastLayerKey === oldKey) {
+  if (sameLayer) {
     const panel = document.querySelector(".panel");
     if (panel) panel.scrollTop = scroll;
     const field = focus.id

@@ -1031,6 +1031,9 @@ summary {
   .panel {
     animation: enter 0.18s ease-out;
   }
+  .panel.no-enter {
+    animation: none;
+  }
   @keyframes enter {
     from {
       transform: translateX(20px);

@@ -268,7 +268,7 @@ function menu(b) {
   ];
   return `<h2 style="font-size:23px;margin-bottom:20px">${esc(b.title)}</h2>${actions.map(([a, i, t]) => `<button class="menu-item ${a === "delete" ? "danger" : ""}" data-act="${a}" data-id="${esc(b.id)}">${ico(i)}${t}</button>`).join("")}<a class="menu-item" href="${esc(searchUrl(b.title, b.author))}" target="_blank" rel="noopener noreferrer">${ico("link")}搜尋書名與作者</a>`;
 }
-export function renderLayer(m) {
+export function renderLayer(m, animate = true) {
   const l = m.state.layers.at(-1);
   if (!l) return "";
   const b = m.books.find((b) => b.id === l.id),
@@ -306,5 +306,5 @@ export function renderLayer(m) {
     title = "書籍已移除";
     body = `<p>這本書已不在書櫃中。</p>${button("back", "返回")}`;
   }
-  return `<div class="overlay ${["filter", "menu", "finish", "drop", "confirm", "discard"].includes(l.type) ? "sheet" : ""}"><section class="panel" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><header class="panel-head"><span id="dialogTitle">${title}</span>${iconButton("back", "關閉" + title, "close")}</header>${body}</section></div>`;
+  return `<div class="overlay ${["filter", "menu", "finish", "drop", "confirm", "discard"].includes(l.type) ? "sheet" : ""}"><section class="panel${animate ? "" : " no-enter"}" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><header class="panel-head"><span id="dialogTitle">${title}</span>${iconButton("back", "關閉" + title, "close")}</header>${body}</section></div>`;
 }
