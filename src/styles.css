@@ -415,6 +415,8 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  flex-shrink: 0;
+  white-space: nowrap;
   color: var(--green);
   background: var(--soft);
   padding: 2px 7px;
@@ -423,6 +425,44 @@ svg {
 .status.dropped {
   color: var(--rose);
   background: #f0e8e4;
+}
+.status.now {
+  color: #344b38;
+  background: #dce6d8;
+  border: 1px solid #a8b7a2;
+  font-weight: 700;
+  box-shadow: 0 2px 7px rgba(67, 87, 65, 0.1);
+}
+.status.now::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #587052;
+  box-shadow: 0 0 0 3px rgba(88, 112, 82, 0.12);
+}
+.pin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  color: #67583f;
+  background: #eee5d4;
+  border: 1px solid #d8c9ad;
+  border-radius: 4px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+.pin-badge svg {
+  width: 12px;
+  height: 12px;
+}
+.book.is-pinned {
+  position: relative;
+  padding-inline: 10px 8px;
+  background: linear-gradient(90deg, #f0eadc 0%, rgba(240, 234, 220, 0.55) 58%, rgba(240, 234, 220, 0) 100%);
+  box-shadow: inset 3px 0 #9b8764;
+  border-radius: 6px 0 0 6px;
 }
 .book-side {
   display: flex;
@@ -1575,7 +1615,7 @@ select:disabled {
   }
   .book {
     padding: 10px 0;
-    grid-template-columns: 17px minmax(0, 1fr) 74px;
+    grid-template-columns: 17px minmax(0, 1fr) 86px;
     column-gap: 6px;
     row-gap: 2px;
   }
