@@ -1,5 +1,5 @@
 import { newId, copyText } from "./browser-utils.js";
-import { renderPage, renderLayer } from "./views.js?v=20260915-like";
+import { renderPage, renderLayer } from "./views.js?v=20260915-recommendation";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
