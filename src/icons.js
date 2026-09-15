@@ -15,6 +15,7 @@ const paths = {
   copy: "M8 8h12v12H8z M16 8V4H4v12h4",
   trash: "M4 6h16 M9 6V3h6v3 M6 6l1 14h10l1-14 M10 10v6 M14 10v6",
   link: "M14 4h6v6 M20 4 10 14 M10 4H4v16h16v-6",
+  bookmark: "M6 4h12v17l-6-4-6 4z",
   star: "m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3l-5.5 2.9 1-6.2L3 9.6l6.2-.9z",
 };
 export const ico = (n) =>
