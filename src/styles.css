@@ -441,11 +441,11 @@ svg {
   background: #587052;
   box-shadow: 0 0 0 3px rgba(88, 112, 82, 0.12);
 }
-.book-heading {
+.book-marker {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 5px;
-  min-width: 0;
+  gap: 3px;
 }
 .pin-mark {
   display: inline-flex;
@@ -463,11 +463,15 @@ svg {
   height: 12px;
 }
 .book.is-pinned {
-  position: relative;
-  padding-inline: 10px 8px;
-  background: linear-gradient(90deg, rgba(221, 230, 218, 0.72) 0%, rgba(232, 238, 229, 0.34) 58%, rgba(232, 238, 229, 0) 100%);
-  box-shadow: inset 3px 0 #72846e;
-  border-radius: 6px 0 0 6px;
+  background: none;
+}
+.book-tags {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  min-width: 0;
+}
+.book-tags:empty {
+  display: none;
 }
 .book-side {
   display: flex;
@@ -1429,6 +1433,7 @@ select:disabled {
 }
 .book-notes {
   grid-column: 2/-1;
+  grid-row: 3;
   min-width: 0;
 }
 .book-notes:empty {
