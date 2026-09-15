@@ -441,27 +441,32 @@ svg {
   background: #587052;
   box-shadow: 0 0 0 3px rgba(88, 112, 82, 0.12);
 }
-.pin-badge {
+.book-heading {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.pin-mark {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 1px 6px;
-  color: #67583f;
-  background: #eee5d4;
-  border: 1px solid #d8c9ad;
-  border-radius: 4px;
-  font-weight: 700;
-  line-height: 1.7;
+  justify-content: center;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  color: #51664f;
+  background: #e3eae0;
+  border-radius: 50%;
 }
-.pin-badge svg {
+.pin-mark svg {
   width: 12px;
   height: 12px;
 }
 .book.is-pinned {
   position: relative;
   padding-inline: 10px 8px;
-  background: linear-gradient(90deg, #f0eadc 0%, rgba(240, 234, 220, 0.55) 58%, rgba(240, 234, 220, 0) 100%);
-  box-shadow: inset 3px 0 #9b8764;
+  background: linear-gradient(90deg, rgba(221, 230, 218, 0.72) 0%, rgba(232, 238, 229, 0.34) 58%, rgba(232, 238, 229, 0) 100%);
+  box-shadow: inset 3px 0 #72846e;
   border-radius: 6px 0 0 6px;
 }
 .book-side {
