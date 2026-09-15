@@ -463,7 +463,10 @@ svg {
   height: 12px;
 }
 .book.is-pinned {
-  background: none;
+  background: #f1f4ef;
+  box-shadow: inset 3px 0 #72846e;
+  border-radius: 6px 0 0 6px;
+  padding-inline: 8px 6px;
 }
 .book-tags {
   grid-column: 2 / -1;
@@ -472,6 +475,18 @@ svg {
 }
 .book-tags:empty {
   display: none;
+}
+.book-footer {
+  grid-column: 2 / -1;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.book-footer .row-actions {
+  margin-left: auto;
 }
 .book-side {
   display: flex;
@@ -1433,7 +1448,7 @@ select:disabled {
 }
 .book-notes {
   grid-column: 2/-1;
-  grid-row: 3;
+  grid-row: 4;
   min-width: 0;
 }
 .book-notes:empty {
@@ -1445,7 +1460,7 @@ select:disabled {
 .book-notes .book-links {
   margin: 3px 0;
 }
-.book-notes .synopsis-toggle {
+.book-footer .synopsis-toggle {
   min-height: 32px;
   padding: 0;
 }
