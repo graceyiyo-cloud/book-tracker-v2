@@ -1,9 +1,5 @@
-import {
-  newId,
-  copyText,
-  androidBrowserIntentUrl,
-} from "./browser-utils.js";
-import { renderPage, renderLayer } from "./views.js?v=20261006-external-browser";
+import { newId, copyText } from "./browser-utils.js";
+import { renderPage, renderLayer } from "./views.js?v=20261006-direct-intent";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
@@ -306,14 +302,6 @@ document.addEventListener("click", async (e) => {
   const { act, id, value } = el.dataset,
     b = model.books.find((b) => b.id === id),
     layer = top();
-  if (act === "externalSearch") {
-    const intentUrl = androidBrowserIntentUrl(el.href);
-    if (intentUrl) {
-      e.preventDefault();
-      location.assign(intentUrl);
-    }
-    return;
-  }
   if (act === "back") router.back();
   else if (act === "page") {
     if (router.state.page !== value) change({ ...defaultState(), page: value });
