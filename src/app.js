@@ -1,5 +1,5 @@
-import { newId, copyText } from "./browser-utils.js?v=20261006-browser-v8";
-import { renderPage, renderLayer } from "./views.js?v=20261006-browser-v8";
+import { newId, copyText } from "./browser-utils.js?v=20261006-new-tabs-v9";
+import { renderPage, renderLayer } from "./views.js?v=20261006-new-tabs-v9";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
