@@ -22,9 +22,7 @@ export function androidBrowserIntentUrl(
     return "";
   }
   if (!['http:', 'https:'].includes(parsed.protocol)) return "";
-  const scheme = parsed.protocol.slice(0, -1);
-  const destination = `${parsed.host}${parsed.pathname}${parsed.search}`;
-  return `intent://${destination}#Intent;scheme=${scheme};package=com.android.chrome;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end`;
+  return `googlechrome://navigate?url=${encodeURIComponent(parsed.href)}`;
 }
 
 export async function copyText(text) {

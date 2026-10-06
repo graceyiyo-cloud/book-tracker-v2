@@ -1,5 +1,5 @@
 import { ico, esc } from "./icons.js?v=20260915-like";
-import { androidBrowserIntentUrl } from "./browser-utils.js?v=20261006-chrome-intent";
+import { androidBrowserIntentUrl } from "./browser-utils.js?v=20261006-chrome-scheme";
 import {
   labels,
   kind,
