@@ -1,5 +1,5 @@
 import { ico, esc } from "./icons.js?v=20260915-like";
-import { androidBrowserIntentUrl } from "./browser-utils.js?v=20261006-browser-stable-v6";
+import { androidBrowserIntentUrl } from "./browser-utils.js?v=20261006-browser-newtab-v7";
 import {
   labels,
   kind,
@@ -17,7 +17,7 @@ const iconButton = (act, label, icon, id = "") =>
   `<button class="icon" data-act="${act}" data-id="${esc(id)}" aria-label="${esc(label)}" title="${esc(label)}">${ico(icon)}</button>`;
 const externalLink = (url, content, className = "", title = "") => {
   const intentUrl = androidBrowserIntentUrl(url);
-  return `<a${className ? ` class="${className}"` : ""} href="${esc(intentUrl || url)}"${intentUrl ? "" : ' target="_blank" rel="noopener noreferrer"'}${title ? ` title="${esc(title)}"` : ""}>${content}</a>`;
+  return `<a${className ? ` class="${className}"` : ""} href="${esc(intentUrl || url)}" target="_blank" rel="noopener noreferrer"${title ? ` title="${esc(title)}"` : ""}>${content}</a>`;
 };
 const status = (b) => {
   const state = kind(b);
