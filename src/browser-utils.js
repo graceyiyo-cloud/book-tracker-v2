@@ -24,7 +24,7 @@ export function androidBrowserIntentUrl(
   if (!['http:', 'https:'].includes(parsed.protocol)) return "";
   const scheme = parsed.protocol.slice(0, -1);
   const destination = `${parsed.host}${parsed.pathname}${parsed.search}`;
-  return `intent://${destination}#Intent;scheme=${scheme};package=com.android.chrome;component=com.android.chrome/com.google.android.apps.chrome.Main;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end`;
+  return `intent://${destination}#Intent;scheme=${scheme};package=com.android.chrome;component=com.android.chrome/com.google.android.apps.chrome.IntentDispatcher;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end`;
 }
 
 export async function copyText(text) {
