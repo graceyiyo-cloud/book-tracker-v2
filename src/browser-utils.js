@@ -10,6 +10,23 @@ export function newId() {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 }
 
+export function androidBrowserIntentUrl(
+  url,
+  userAgent = globalThis.navigator?.userAgent || "",
+) {
+  if (!/Android/i.test(userAgent)) return "";
+  let parsed;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return "";
+  }
+  if (!['http:', 'https:'].includes(parsed.protocol)) return "";
+  const scheme = parsed.protocol.slice(0, -1);
+  const destination = `${parsed.host}${parsed.pathname}${parsed.search}${parsed.hash}`;
+  return `intent://${destination}#Intent;scheme=${scheme};action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end`;
+}
+
 export async function copyText(text) {
   if (globalThis.navigator?.clipboard?.writeText) {
     try {
