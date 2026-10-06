@@ -1,5 +1,5 @@
-import { newId, copyText } from "./browser-utils.js?v=20261006-chrome-launch-v4";
-import { renderPage, renderLayer } from "./views.js?v=20261006-chrome-launch-v4";
+import { newId, copyText } from "./browser-utils.js?v=20261006-chrome-launch-v5";
+import { renderPage, renderLayer } from "./views.js?v=20261006-chrome-launch-v5";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
