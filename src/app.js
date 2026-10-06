@@ -1,4 +1,4 @@
-import { newId, copyText } from "./browser-utils.js?v=20261006-chrome-scheme";
+import { newId, copyText } from "./browser-utils.js?v=20261006-chrome-intent-v2";
 import { renderPage, renderLayer } from "./views.js?v=20261006-direct-intent";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
