@@ -1,5 +1,5 @@
 import { newId, copyText } from "./browser-utils.js?v=20261006-new-tabs-v9";
-import { renderPage, renderLayer } from "./views.js?v=20261006-new-tabs-v9";
+import { renderPage, renderLayer } from "./views.js?v=20261021-theme";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
@@ -24,6 +24,15 @@ const model = {
   loginStep: "home",
   loginError: "",
 };
+const THEME_KEY = "reading-journal-theme";
+function setTheme(theme) {
+  const selected = theme === "slate" ? "slate" : "original";
+  document.documentElement.dataset.theme = selected;
+  model.theme = selected;
+  try { localStorage.setItem(THEME_KEY, selected); } catch {}
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", selected === "slate" ? "#f4f2ed" : "#f6f3ed");
+}
+setTheme((() => { try { return localStorage.getItem(THEME_KEY); } catch { return null; } })());
 const dirty = new Set();
 let repository, cloud, unsubscribe, lastLayerKey, toastTimer, afterBack;
 const top = () => router.state.layers.at(-1);
@@ -303,6 +312,10 @@ document.addEventListener("click", async (e) => {
     b = model.books.find((b) => b.id === id),
     layer = top();
   if (act === "back") router.back();
+  else if (act === "theme") {
+    setTheme(value);
+    render();
+  }
   else if (act === "page") {
     if (router.state.page !== value) change({ ...defaultState(), page: value });
   } else if (act === "status") {
