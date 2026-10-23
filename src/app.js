@@ -35,6 +35,7 @@ function setTheme(theme) {
 setTheme((() => { try { return localStorage.getItem(THEME_KEY); } catch { return null; } })());
 const dirty = new Set();
 let repository, cloud, unsubscribe, lastLayerKey, toastTimer, afterBack;
+let composingSearch = false;
 const top = () => router.state.layers.at(-1);
 const router = createRouter(
   (state) => {
@@ -81,7 +82,27 @@ function render() {
   const nextKey = top()?.key;
   const sameLayer = !!nextKey && nextKey === oldKey;
   lastLayerKey = nextKey;
-  if (!sameLayer) document.getElementById("app").innerHTML = renderPage(model);
+  if (!sameLayer) {
+    const app = document.getElementById("app");
+    const markup = renderPage(model);
+    if (focus.id === "search" && !nextKey && app.querySelector("#content")) {
+      // Keep the actual input connected so focus, selection and the mobile IME
+      // survive filtering and background cloud updates.
+      const template = document.createElement("template");
+      template.innerHTML = markup;
+      for (const selector of ["#content", ".nav", ".bottom-nav", ".sidebar-foot", ".preview"]) {
+        const old = app.querySelector(selector);
+        const next = template.content.querySelector(selector);
+        if (old && next) old.replaceWith(next);
+      }
+      if (!composingSearch && active.value !== model.state.query)
+        active.value = model.state.query;
+      const clear = app.querySelector('[data-act="clearSearch"]');
+      const nextClear = template.content.querySelector('[data-act="clearSearch"]');
+      if (clear) clear.remove();
+      if (nextClear) active.closest(".search").append(nextClear);
+    } else app.innerHTML = markup;
+  }
   document.getElementById("layer").innerHTML = renderLayer(model, !sameLayer);
   document.getElementById("app").inert = !!top();
   document.body.style.overflow = top() ? "hidden" : "";
@@ -303,7 +324,13 @@ function handleInput(e) {
   } else updateDraft(input);
 }
 document.addEventListener("input", handleInput);
-document.addEventListener("compositionend", handleInput);
+document.addEventListener("compositionstart", (e) => {
+  if (e.target.id === "search") composingSearch = true;
+});
+document.addEventListener("compositionend", (e) => {
+  if (e.target.id === "search") composingSearch = false;
+  handleInput(e);
+});
 document.addEventListener("change", (e) => updateDraft(e.target));
 document.addEventListener("click", async (e) => {
   const el = e.target.closest("[data-act]");
