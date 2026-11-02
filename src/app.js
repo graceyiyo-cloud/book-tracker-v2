@@ -1,5 +1,5 @@
 import { newId, copyText } from "./browser-utils.js?v=20261006-new-tabs-v9";
-import { renderPage, renderLayer } from "./views.js?v=20261103-mist-theme";
+import { renderPage, renderLayer } from "./views.js?v=20261103-mist-theme-v2";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,

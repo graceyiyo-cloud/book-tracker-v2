@@ -1841,6 +1841,26 @@ select:disabled {
 :root[data-theme="mist"] .books {
   border-top: 0;
 }
+:root[data-theme="mist"] .tabs {
+  gap: 4px;
+  padding: 5px;
+  margin-block: 14px 8px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--soft);
+}
+:root[data-theme="mist"] .tabs button {
+  flex: 1 0 auto;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 10px;
+  color: var(--muted);
+}
+:root[data-theme="mist"] .tabs button.active {
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 2px 8px #6b514014;
+}
 :root[data-theme="mist"] .book {
   padding: 18px 20px;
   margin-bottom: 12px;
@@ -1870,11 +1890,40 @@ select:disabled {
 :root[data-theme="mist"] .record-summary.dropped {
   background: #f2e7e2;
 }
+:root[data-theme="mist"] .overlay {
+  background: #45362d66;
+}
+:root[data-theme="mist"] .panel {
+  box-shadow: -14px 0 48px #45362d1f;
+}
+:root[data-theme="mist"] .panel:not(.no-enter) {
+  animation: none;
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), opacity 220ms ease-out;
+}
+:root[data-theme="mist"] .toast {
+  border: 1px solid #ffffff33;
+  border-radius: 12px;
+  transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1), opacity 180ms ease-out;
+}
+:root[data-theme="mist"] :is(button, a):focus-visible {
+  outline-color: var(--green);
+  outline-offset: 3px;
+}
+@starting-style {
+  :root[data-theme="mist"] .panel:not(.no-enter) {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0;
+  }
+  :root[data-theme="mist"] .toast {
+    transform: translate(-50%, 8px);
+    opacity: 0;
+  }
+}
 @media (hover: hover) and (pointer: fine) {
-  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .nav button, .bottom-nav button) {
+  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .tabs button, .nav button, .bottom-nav button) {
     transition: background-color 160ms ease, border-color 160ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
   }
-  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .nav button, .bottom-nav button):active {
+  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .tabs button, .nav button, .bottom-nav button):active {
     transform: scale(0.97);
   }
   :root[data-theme="mist"] .book {
@@ -1886,12 +1935,23 @@ select:disabled {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .nav button, .bottom-nav button, .book) {
+  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .tabs button, .nav button, .bottom-nav button, .book, .panel, .toast) {
     transition: none;
+  }
+  :root[data-theme="mist"] .panel {
+    animation: none;
   }
 }
 @media (max-width: 650px) {
   :root[data-theme="mist"] .book {
     padding: 14px 12px;
+  }
+  :root[data-theme="mist"] .tabs {
+    gap: 0;
+    padding: 4px;
+  }
+  :root[data-theme="mist"] .tabs button {
+    padding: 8px 6px;
+    font-size: 12px;
   }
 }
