@@ -1,5 +1,5 @@
 import { newId, copyText } from "./browser-utils.js?v=20261006-new-tabs-v9";
-import { renderPage, renderLayer } from "./views.js?v=20261021-theme";
+import { renderPage, renderLayer } from "./views.js?v=20261103-mist-theme";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
@@ -26,11 +26,11 @@ const model = {
 };
 const THEME_KEY = "reading-journal-theme";
 function setTheme(theme) {
-  const selected = theme === "slate" ? "slate" : "original";
+  const selected = ["original", "slate", "mist"].includes(theme) ? theme : "original";
   document.documentElement.dataset.theme = selected;
   model.theme = selected;
   try { localStorage.setItem(THEME_KEY, selected); } catch {}
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", selected === "slate" ? "#f4f2ed" : "#f6f3ed");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", { original: "#f6f3ed", slate: "#f4f2ed", mist: "#f5f0e9" }[selected]);
 }
 setTheme((() => { try { return localStorage.getItem(THEME_KEY); } catch { return null; } })());
 const dirty = new Set();

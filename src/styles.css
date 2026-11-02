@@ -38,6 +38,26 @@
   --pinned-line: #758fa0;
   --record-bg: #e9f0f3;
 }
+:root[data-theme="mist"] {
+  --paper: #f5f0e9;
+  --surface: #fffaf4;
+  --ink: #3c332f;
+  --muted: #736963;
+  --green: #745f58;
+  --line: #e4d9ce;
+  --soft: #eee5db;
+  --rose: #986f69;
+  --focus: #ad9185;
+  --now-ink: #634f49;
+  --now-bg: #e9dcd1;
+  --now-line: #c7ac9d;
+  --now-dot: #896b5f;
+  --pin-ink: #70594e;
+  --pin-bg: #eadbcf;
+  --pinned-bg: #faf3ec;
+  --pinned-line: #aa8978;
+  --record-bg: #f1e7dd;
+}
 * {
   box-sizing: border-box;
 }
@@ -808,7 +828,7 @@ summary {
 }
 .theme-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 10px;
 }
 .theme-option {
@@ -1811,5 +1831,67 @@ select:disabled {
   .book .row-actions > .icon {
     width: 28px;
     padding: 5px;
+  }
+}
+
+/* 奶茶柔霧：只作用於第三套主題，原本與灰藍配色維持原樣。 */
+:root[data-theme="mist"] .sidebar {
+  background: #f1e9e0;
+}
+:root[data-theme="mist"] .books {
+  border-top: 0;
+}
+:root[data-theme="mist"] .book {
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 2px 12px #6b51400a;
+}
+:root[data-theme="mist"] .book.is-pinned {
+  background: var(--pinned-bg);
+  border-color: var(--pinned-line);
+  box-shadow: inset 3px 0 var(--pinned-line), 0 2px 12px #6b51400a;
+}
+:root[data-theme="mist"] :is(.btn, .icon, .chip, .tag, .status, .preview, .year-card, .theme-option) {
+  border-radius: 10px;
+}
+:root[data-theme="mist"] :is(.settings-card, .login-card, .note, .panel) {
+  border-radius: 18px;
+}
+:root[data-theme="mist"] .theme-option.selected {
+  box-shadow: inset 0 0 0 1px var(--green);
+}
+:root[data-theme="mist"] .book-index {
+  color: #aa9788;
+}
+:root[data-theme="mist"] .status.dropped,
+:root[data-theme="mist"] .record-summary.dropped {
+  background: #f2e7e2;
+}
+@media (hover: hover) and (pointer: fine) {
+  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .nav button, .bottom-nav button) {
+    transition: background-color 160ms ease, border-color 160ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .nav button, .bottom-nav button):active {
+    transform: scale(0.97);
+  }
+  :root[data-theme="mist"] .book {
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+  :root[data-theme="mist"] .book:hover {
+    border-color: #d3c0af;
+    box-shadow: 0 5px 20px #6b514014;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="mist"] :is(.btn, .icon, .theme-option, .year-card, .nav button, .bottom-nav button, .book) {
+    transition: none;
+  }
+}
+@media (max-width: 650px) {
+  :root[data-theme="mist"] .book {
+    padding: 14px 12px;
   }
 }
