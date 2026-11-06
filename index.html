@@ -9,8 +9,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/reading-journal-20261023-180.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="./icons/reading-journal-20261023-48.png" />
     <link rel="manifest" href="./manifest.webmanifest?v=20261023-icon" />
-    <script>try { const theme = localStorage.getItem("reading-journal-theme"); document.documentElement.dataset.theme = ["original", "slate", "mist"].includes(theme) ? theme : "original"; } catch { document.documentElement.dataset.theme = "original"; }</script>
-    <link rel="stylesheet" href="./src/styles.css?v=20261103-mist-theme-v2" />
+    <script>try { const theme = localStorage.getItem("reading-journal-theme"); document.documentElement.dataset.theme = ["original", "slate", "mist", "folio"].includes(theme) ? theme : "original"; if (theme === "folio") document.write('<link id="folio-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap">'); } catch { document.documentElement.dataset.theme = "original"; }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./src/styles.css?v=20261106-folio-theme" />
     <title>閱讀手帳</title>
   </head>
   <body>
@@ -18,6 +20,6 @@
     <div id="layer"></div>
     <div id="toast" role="status" aria-live="polite"></div>
     <noscript>請啟用 JavaScript 以使用閱讀手帳。</noscript>
-    <script type="module" src="./src/app.js?v=20261103-mist-theme-v2"></script>
+    <script type="module" src="./src/app.js?v=20261106-folio-theme"></script>
   </body>
 </html>

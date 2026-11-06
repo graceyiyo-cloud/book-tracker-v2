@@ -1,5 +1,5 @@
 import { newId, copyText } from "./browser-utils.js?v=20261006-new-tabs-v9";
-import { renderPage, renderLayer } from "./views.js?v=20261103-mist-theme-v2";
+import { renderPage, renderLayer } from "./views.js?v=20261106-folio-theme";
 import { createDemoRepository, loadCloud, lookupBook } from "./repository.js";
 import {
   DEFAULT_CATEGORIES,
@@ -25,16 +25,37 @@ const model = {
   loginError: "",
 };
 const THEME_KEY = "reading-journal-theme";
+const THEME_COLORS = { original: "#f6f3ed", slate: "#f4f2ed", mist: "#f5f0e9", folio: "#f2ede4" };
+function loadFolioFonts() {
+  if (document.getElementById("folio-fonts")) return;
+  const link = document.createElement("link");
+  link.id = "folio-fonts";
+  link.rel = "stylesheet";
+  link.href = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Serif+TC:wght@500;600;700&display=swap";
+  document.head.append(link);
+}
 function setTheme(theme) {
-  const selected = ["original", "slate", "mist"].includes(theme) ? theme : "original";
+  const selected = Object.hasOwn(THEME_COLORS, theme) ? theme : "original";
   document.documentElement.dataset.theme = selected;
   model.theme = selected;
+  if (selected === "folio") loadFolioFonts();
   try { localStorage.setItem(THEME_KEY, selected); } catch {}
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", { original: "#f6f3ed", slate: "#f4f2ed", mist: "#f5f0e9" }[selected]);
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLORS[selected]);
 }
 setTheme((() => { try { return localStorage.getItem(THEME_KEY); } catch { return null; } })());
 const dirty = new Set();
 let repository, cloud, unsubscribe, lastLayerKey, toastTimer, afterBack;
+let lastView, enterTimer;
+// Mark real page/tab changes so a theme can play an entrance once,
+// without replaying it on every background re-render.
+function markEntering(app) {
+  const view = [model.mode, model.loginStep, model.state.page, model.state.status].join("|");
+  if (view === lastView) return;
+  lastView = view;
+  app.classList.add("is-entering");
+  clearTimeout(enterTimer);
+  enterTimer = setTimeout(() => app.classList.remove("is-entering"), 1400);
+}
 let composingSearch = false;
 const top = () => router.state.layers.at(-1);
 const router = createRouter(
@@ -84,6 +105,7 @@ function render() {
   lastLayerKey = nextKey;
   if (!sameLayer) {
     const app = document.getElementById("app");
+    markEntering(app);
     const markup = renderPage(model);
     if (focus.id === "search" && !nextKey && app.querySelector("#content")) {
       // Keep the actual input connected so focus, selection and the mobile IME
