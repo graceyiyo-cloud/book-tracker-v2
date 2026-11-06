@@ -2371,7 +2371,7 @@ select:disabled {
 }
 :root[data-theme="folio"] .book {
   position: relative;
-  grid-template-columns: 62px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   column-gap: 20px;
   row-gap: 6px;
   padding: 26px 10px 24px 18px;
@@ -2414,9 +2414,23 @@ select:disabled {
     color 0.4s,
     transform 0.6s var(--ease);
 }
+/* No row numbers: pinned rows show the accent bar; the pin label stays for screen readers. */
 :root[data-theme="folio"] .book-marker {
-  align-items: flex-start;
-  gap: 10px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+:root[data-theme="folio"] .book-body {
+  grid-column: 1;
+}
+:root[data-theme="folio"] .book-side {
+  grid-column: 2;
+}
+:root[data-theme="folio"] :is(.book-tags, .book-recommendation, .book-footer, .book-notes) {
+  grid-column: 1 / -1;
 }
 :root[data-theme="folio"] .pin-mark {
   width: 24px;
@@ -3182,7 +3196,7 @@ select:disabled {
   }
   :root[data-theme="folio"] .book,
   :root[data-theme="folio"] .book.is-pinned {
-    grid-template-columns: 30px minmax(0, 1fr) 86px;
+    grid-template-columns: minmax(0, 1fr) 86px;
     column-gap: 10px;
     row-gap: 4px;
     padding: 18px 4px 16px 10px;
