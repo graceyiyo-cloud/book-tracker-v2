@@ -2013,6 +2013,14 @@ select:disabled {
   letter-spacing: 0.32em;
   text-transform: uppercase;
 }
+/* Lining figures: old-style "1" and "0" read like "I" and "O". */
+:root[data-theme="folio"] :is(.book-index, .folio-kicker, .folio-figure, .summary-item, .mini-stats, .tabs .count, .year-card, .nav button, .sidebar-foot) {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+:root[data-theme="folio"] :is(.summary-item strong, .mini-stats strong, .folio-figure strong),
+:root[data-theme="folio"] .nav button::before {
+  font-variant-numeric: lining-nums tabular-nums;
+}
 :root[data-theme="folio"] :is(button, a):focus-visible {
   outline: 1.5px solid var(--ink);
   outline-offset: 3px;
@@ -2227,6 +2235,19 @@ select:disabled {
   letter-spacing: 0.12em;
   color: var(--muted);
 }
+:root[data-theme="folio"] select {
+  appearance: none;
+  padding-right: 42px;
+  background: #fffdf9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f6760' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center / 16px;
+}
+:root[data-theme="folio"] .panel .prose {
+  font-family: var(--f-serif);
+  line-height: 2.05;
+  color: #3d3632;
+}
+:root[data-theme="folio"] .detail-actions .btn {
+  flex: 1 1 auto;
+}
 
 /* ---------- Masthead ---------- */
 :root[data-theme="folio"] .folio-mast {
@@ -2368,7 +2389,7 @@ select:disabled {
 :root[data-theme="folio"] .book.is-pinned {
   padding: 26px 10px 24px 18px;
   border-radius: 0;
-  background: linear-gradient(90deg, #f3e6df, transparent 78%);
+  background: linear-gradient(90deg, #f4e9e2, transparent 78%);
   box-shadow: none;
 }
 :root[data-theme="folio"] .book.is-pinned::after {
@@ -3066,6 +3087,10 @@ select:disabled {
   :root[data-theme="folio"] .nav button {
     font-size: 17px;
     gap: 12px;
+  }
+  :root[data-theme="folio"] .sidebar-foot span[style] {
+    white-space: nowrap;
+    letter-spacing: 0.14em;
   }
   :root[data-theme="folio"] .main {
     padding: 28px 36px 80px;

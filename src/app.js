@@ -26,8 +26,12 @@ const model = {
 };
 const THEME_KEY = "reading-journal-theme";
 const THEME_COLORS = { original: "#f6f3ed", slate: "#f4f2ed", mist: "#f5f0e9", folio: "#f2ede4" };
-function loadFolioFonts() {
-  if (document.getElementById("folio-fonts")) return;
+// Folio's web fonts are only enabled while folio is active, so the other
+// themes keep their original system fonts (base headings also list Noto Serif TC).
+function loadFolioFonts(enabled) {
+  const existing = document.getElementById("folio-fonts");
+  if (existing) existing.disabled = !enabled;
+  if (existing || !enabled) return;
   const link = document.createElement("link");
   link.id = "folio-fonts";
   link.rel = "stylesheet";
@@ -38,7 +42,7 @@ function setTheme(theme) {
   const selected = Object.hasOwn(THEME_COLORS, theme) ? theme : "original";
   document.documentElement.dataset.theme = selected;
   model.theme = selected;
-  if (selected === "folio") loadFolioFonts();
+  loadFolioFonts(selected === "folio");
   try { localStorage.setItem(THEME_KEY, selected); } catch {}
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLORS[selected]);
 }
